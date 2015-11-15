@@ -36,9 +36,9 @@ public class MathManager {
 		circleArea();
 		opposite();
 		power();
-		String line1 = new String("calculation 1: Area of circle with radius " + radius + " = " + areaOfACircle );
-		String line2 = new String("calculation 2: Length of opposite where angle B is  "+ angleB + "and hypotenus is " + hypotenus + " = " + opposite);
-		String line3 = new String("calculation 3: Power of " +base+ " with exp of	"+exp+"  =  " + power );
+		String line1 = new String("calculation 1: Area of circle with radius " + radius + " is : " + areaOfACircle );
+		String line2 = new String("calculation 2: Length of opposite where angle B is  "+ angleB + "and hypotenus is " + hypotenus + " is : " + opposite);
+		String line3 = new String("calculation 3: Power of " +base+ " with exp of	"+exp+"  is :  " + power );
 
 		return resultStr = (line1 + "<br>" + line2 + "<br>" +line3 );			
 		

@@ -19,6 +19,6 @@ public class Ex03Servlet extends HttpServlet {
 				
 		MathManager mathManager = new MathManager();
 		String resultStr = mathManager.getResults();
-		resp.getWriter().println(" The results are : " + resultStr  + "  ");
+		resp.getWriter().println(" The results are : " + "<br>" + resultStr  + "  ");
 	}
 }

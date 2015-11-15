@@ -9,7 +9,7 @@ public class MtajavaServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/html");
-		resp.getWriter().println("Hello, ELI");
+		resp.getWriter().println("Hello, BEN and ELI");
 	
 	}
 }

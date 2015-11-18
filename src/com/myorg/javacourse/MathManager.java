@@ -2,22 +2,21 @@ package com.myorg.javacourse;
 
 public class MathManager {
 
-	
-	private static double radius ;
+	private double radius ;
 	private double areaOfACircle;
-	private static double angleB , hypotenus ; 
-	private double  opposite;
-	private static double base, exp  ;
+	private double angleB , hypotenus ; 
+	private double opposite;
+	private double base, exp  ;
 	private double power ;
 	
-	public static void setRadius(double initialRadius){
+	public void setRadius(double initialRadius){
 		radius = initialRadius ;
 	}
-	public static void setTriangle(double iniTialangleB , double initialHypotenus){
+	public void setTriangle(double iniTialangleB , double initialHypotenus){
 		angleB = iniTialangleB ;
 		hypotenus = initialHypotenus ;
 	}
-	public static void setBaseNExp(double initialBase , double initialExp ){
+	public void setBaseNExp(double initialBase , double initialExp ){
 		base = initialBase ;
 		exp = initialExp ;
 	}

@@ -1,9 +1,8 @@
 package com.myorg.javacourse;
-
-import java.io.IOException;
-import java.util.Date;
-import javax.servlet.http.*;
 import com.myorg.javacourse.Stock;
+import java.io.IOException;
+import javax.servlet.http.*;
+import java.util.Date ;
 
 
 @SuppressWarnings("serial")
@@ -12,21 +11,31 @@ public class StockDetailsServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/html");
 		
-		Date d = new Date();
-		d.setDate(11);
-		d.setMonth(15);
-		d.setYear(2014);
+		Stock[] stocks = {new Stock() ,new Stock() ,new Stock()};
+		java.util.Date date = new java.util.Date();
 		
+		String symbol[]= {" PIH " ," AAL " , " CAAS " } ;
+		float ask[]={13.1f,5.78f,32.2f};
+		float bid[]={12.4f,5.5f,31.5f};
+		date.setDate(15);
+		date.setMonth(11);
+		date.setYear(2014);
 		
-		Stock[] stocks = new Stock[3];
+			for(int i = 0 ; i < stocks.length  ; i++){
+				stocks[i].setSymbol(symbol[i]);
+				stocks[i].setAsk(ask[i]);
+				stocks[i].setBid(bid[i]);
+				stocks[i].setData(date);
+			}
 		
-			stocks[0] = new Stock(13.1f, 12.4f, d , "PIH");
-			stocks[1] = new Stock(5.78f, 5.5f, d, "AAL");
-			stocks[2] = new Stock(32.2f, 31.5f, d, "CAAS");
-		
-			for(int i = 0; i < stocks.length; i++)
-			{
-				resp.getWriter().println(stocks[i].getHtmlDescription() + "<br>");
+			resp.getWriter().println(" <b>Stocks details are :</b> " + "<br>" );
+			
+			for(int i = 0 ; i < stocks.length  ; i++){
+				resp.getWriter().println( stocks[i].getHtmlDescription()  + "<br>");
 			}
 	}
 }
+
+		
+		
+	

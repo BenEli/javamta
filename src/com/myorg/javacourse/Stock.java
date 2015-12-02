@@ -3,13 +3,23 @@ import java.util.Date ;
 import java.util.Calendar;
 public class Stock {
 	
+		enum Orders{BUY, SELL, REMOVE, HOLD};
 		private String symbol ;
 		private float  ask;
 		private float bid;
-		private java.util.Date data;
-		private int day;
-		private int month;
-		private int year ;
+		private Date data;
+		private int recommendation;
+		private int stockQuantity;
+		
+		public Stock(){
+			this("", 0f, 0f, null);
+		}
+		public Stock(String symbol, float ask, float bid, Date date){
+			this.setSymbol(symbol);
+			this.setAsk(ask);
+			this.setBid(bid);
+			this.setData(date);
+		}
 	
 		public String getSymbol() {
 			return symbol;
@@ -29,12 +39,18 @@ public class Stock {
 		public void setBid(float bid) {
 			this.bid = bid;
 		}
-		public java.util.Date getData() {
+		public Date getData() {
 			return data;
 		}
-		public void setData(java.util.Date data) {
+		public void setData(Date data) {
 			this.data= data;	
-		} 
+		}
+		public int getrecommendation(){
+			return recommendation;
+		}
+		public int getStockQuantity(){
+			return stockQuantity;
+		}
 
 		public String getHtmlDescription() {         
 		String  stockDetails = ( "<b>stock symbol</b> :" +  getSymbol()  +"   <b>ask</b> :"+getAsk()+"   <b>Bid</b> :" + getBid() + "   <b>date</b> :" + data.getDate() + "/" +data.getMonth()+ "/" +data.getYear() );

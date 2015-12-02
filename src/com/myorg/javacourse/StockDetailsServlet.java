@@ -2,7 +2,7 @@ package com.myorg.javacourse;
 import com.myorg.javacourse.Stock;
 import java.io.IOException;
 import javax.servlet.http.*;
-import java.util.Date ;
+import java.util.Date;
 
 
 @SuppressWarnings("serial")
@@ -12,7 +12,7 @@ public class StockDetailsServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		
 		Stock[] stocks = {new Stock() ,new Stock() ,new Stock()};
-		java.util.Date date = new java.util.Date();
+		Date date = new Date();
 		
 		String symbol[]= {" PIH " ," AAL " , " CAAS " } ;
 		float ask[]={13.1f,5.78f,32.2f};

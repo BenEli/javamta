@@ -128,6 +128,3 @@ public class Stock {
 		}
 }
 	
-
-	
-

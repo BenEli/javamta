@@ -23,17 +23,20 @@ public class PortfolioManager {
 		date = new Date();
 		boolean res;
 		
-		Portfolio portfolio = new Portfolio("portfolio1", null, (short)0);
+		Portfolio myPortfolio = new Portfolio("Exercise 7 portfolio", null, (short)0 ,0f);
+		myPortfolio.updateBalance( 10000f );
 		
 		date.setDate(15);
 		date.setMonth(11);
 		date.setYear(2014);
 		
-		res = portfolio.addStock(new Stock("PIH", 13.1f, 12.4f, this.date, 1, -1));
-		res = portfolio.addStock(new Stock("AAL", 5.78f, 5.5f, this.date, 1, -1));
-		res = portfolio.addStock(new Stock("CAAS", 32.2f, 31.5f, this.date, 1, -1));
+		myPortfolio.buyStock(new Stock("PIH", 10.0f, 8.5f, this.date, 0, null),20 );
+		myPortfolio.buyStock(new Stock("AAL", 30.0f, 25.5f, this.date, 0, null),30 );
+		myPortfolio.buyStock(new Stock("CAAS", 20.0f, 15.5f, this.date, 0, null),40 );	
 		
-		return portfolio;
+		myPortfolio.sellStock("AAL" ,-1);
+		myPortfolio.removeStock("CAAS");
+		return myPortfolio;
 		
 	}
 	/**
@@ -64,4 +67,5 @@ public class PortfolioManager {
 		getStock(portfolio, stockIndex).setAsk(newAsk);
 	}
 
+	
 }

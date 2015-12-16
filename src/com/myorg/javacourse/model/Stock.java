@@ -13,7 +13,7 @@ public class Stock {
 		/**
 		 * group of potential orders about what to do with the stock 
 		 */
-		enum Orders{BUY, SELL, REMOVE, HOLD};
+		enum ALGO_RECOMMENDATION{BUY, SELL, REMOVE, HOLD};
 		
 		private String symbol ;
 		private float  ask;
@@ -22,7 +22,7 @@ public class Stock {
 		/**
 		 * recommendation about what to do with the stock: 0 for buy, 1 for sell, 2 for remove, 3 for hold
 		 */
-		private int recommendation;
+		private ALGO_RECOMMENDATION  recommendation;
 		private int stockQuantity;
 		/**
 		 * copy c'tor
@@ -34,7 +34,7 @@ public class Stock {
 		/**
 		 * c'tor 
 		 */
-		public Stock(String symbol, float ask, float bid, Date date, int stockQuantity, int recommendation){
+		public Stock(String symbol, float ask, float bid, Date date, int stockQuantity, ALGO_RECOMMENDATION recommendation){
 			this.setSymbol(symbol);
 			this.setAsk(ask);
 			this.setBid(bid);
@@ -78,40 +78,21 @@ public class Stock {
 		public void setStockQuantity(int stockQuantity){
 			this.stockQuantity = stockQuantity;
 		}
-		
-		public void setRecommendation(String order){
-			switch (order){
-			case "BUY":
-			case "buy":
-				this.recommendation = Orders.BUY.ordinal();
-				break;
-			case "SELL":
-			case "sell":
-				this.recommendation = Orders.SELL.ordinal();
-				break;
-			case "REMOVE":
-			case "remove":
-				this.recommendation = Orders.REMOVE.ordinal();
-				break;
-			case "HOLD":
-			case "hold":
-				this.recommendation = Orders.HOLD.ordinal();
-				break;
-			default:
-				this.recommendation = -1;
-			}
+		/**
+		 * update stock quantitny updates the old quantity by adding the new amount to quantity of the stock 
+		 * @param amount gets the amount to add 
+		 */
+		public void updateStockQuantity(float amount){
+			if(this.stockQuantity + amount   >= 0  )
+				this.stockQuantity += amount ; 
 		}
 		
-		public void setRecommendation(int order){
+		public void setRecommendation(ALGO_RECOMMENDATION order){
 			this.recommendation = order;
 		}
 		
 		public int getRecommendation(){
-			return this.recommendation; 
-		}
-		
-		public int getrecommendation(){
-			return recommendation;
+			return this.recommendation.ordinal(); 
 		}
 		
 		public int getStockQuantity(){
@@ -123,7 +104,8 @@ public class Stock {
 		 */
 		public String getHtmlDescription() {         
 			String  stockDetails = ( "<b>stock symbol</b> :" +  getSymbol()  +"   <b>ask</b> :"+getAsk()
-				+"   <b>Bid</b> :" + getBid() + "   <b>date</b> :" + data.getDate() + "/" +data.getMonth()+ "/" +data.getYear());
+				+"   <b>Bid</b> :" + getBid() + "   <b>date</b> :" + data.getDate() + "/" +data.getMonth()+ "/" +data.getYear()
+				+"	<b>quantity</b> :" + getStockQuantity() );
 			return stockDetails ;
 		}
 }

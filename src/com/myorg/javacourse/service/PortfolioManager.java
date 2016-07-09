@@ -32,11 +32,9 @@ import com.myorg.javacourse.exception.*;
  */
  
 public class PortfolioManager  implements PortfolioManagerInterface {
-   
     /**
 	 * 
 	 */
-//	private static final long serialVersionUID = 1L;
 	private DatastoreService datastoreService = ServiceManager.datastoreService();
  
     /**
@@ -306,7 +304,7 @@ public class PortfolioManager  implements PortfolioManagerInterface {
      * if possible buy wanted quantity of wanted stock
      * @param symbol is the symbol of the stock to buy
      * @param quantity is the quantity of stocks to buy (-1 for buy all stocks you can)
-     * @throws PortfolioException , BalanceException 
+     * @throws PortfolioException 
      */
     @Override
     public void buyStock(String symbol, int quantity) throws PortfolioException  {
@@ -325,6 +323,7 @@ public class PortfolioManager  implements PortfolioManagerInterface {
      *  if possible sell the wanted quantity from wanted stock
      * @param symbol is the symbol of wanted stock
      * @param quantity is the quantity of stocks to sell (-1) for sell all
+     * throws PortfolioException
      */
     @Override
     public void sellStock(String symbol, int quantity) throws PortfolioException  {
@@ -342,6 +341,7 @@ public class PortfolioManager  implements PortfolioManagerInterface {
     /**
      * remove stock from the portfolio
      * @param symbol is the symbol of the stock to delete
+     * throws PortfolioException
      */
     @Override
     public void removeStock(String symbol) throws PortfolioException {

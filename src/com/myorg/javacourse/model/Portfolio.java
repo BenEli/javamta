@@ -6,7 +6,6 @@ import org.algo.model.StockInterface;
  
 
 
-
 import com.myorg.javacourse.*;
 import com.myorg.javacourse.exception.*;
 /**
@@ -25,7 +24,6 @@ public class Portfolio  implements PortfolioInterface {
     private StockInterface[] stocks;
     private short portfolioSize;
     private float balance;
-   
     /**
      * copy c'tor
      * @param newPortfolio is the portfolio that the c'tor copy
@@ -33,14 +31,12 @@ public class Portfolio  implements PortfolioInterface {
     public Portfolio(Portfolio newPortfolio){
         this(newPortfolio.title, newPortfolio.stocks, newPortfolio.portfolioSize, newPortfolio.balance);
     }
-   
     /**
      * c'tor
      */
     public Portfolio(){
         this(null , null, (short)0, (float)0);
     }
-   
     /**
      * c'tor
      */
@@ -48,8 +44,7 @@ public class Portfolio  implements PortfolioInterface {
         this.stocks = new Stock[MAX_PORTFOLIO_SIZE];
         for(int i = 0; i < stocks.length; i++)
             this.stocks[i] = stocks[i];
-    }
-   
+    }  
     /**
      * c'tor
      */
@@ -63,7 +58,7 @@ public class Portfolio  implements PortfolioInterface {
             for(int i = 0; i < portfolioSize; i++){
                 addStock((Stock)stocks[i]);
             }
-        }catch(PortfolioException e){System.out.println("0001");}
+        }catch(PortfolioException e){System.out.println("Portfolio constructor");}
        
         this.portfolioSize = portfolioSize;
     }
@@ -87,7 +82,6 @@ public class Portfolio  implements PortfolioInterface {
     public int getPortfolioSize(){
         return portfolioSize;
     }
-   
     /**
      * calculate the value of all the stocks in the portfolio
      * @return the value of all the stocks in the portfolio
@@ -149,12 +143,13 @@ public class Portfolio  implements PortfolioInterface {
             i++;
         }          
         return res;
-    }
-   
+    } 
     /**
+     * 
      * update portfolio balance if possible
      * @param amount the amount of money to add or sub from balance (negative number to sub)
-     */
+     * @throws BalanceException
+     */   
     public void updateBalance(float amount) throws BalanceException{
     	
         if(this.balance + amount >= 0)
@@ -164,8 +159,10 @@ public class Portfolio  implements PortfolioInterface {
     }
    
     /**
+     * 
      * if possible and the stock is not already in stocks add stock to portfolio
      * @param newStock the stock to add
+     * @throws PortfolioException
      */
     public void addStock(Stock newStock) throws PortfolioException{
         if(portfolioSize < MAX_PORTFOLIO_SIZE)
@@ -181,10 +178,10 @@ public class Portfolio  implements PortfolioInterface {
         else
             throw new PortfolioFullException("cant add new stock, portfolio can have only " + MAX_PORTFOLIO_SIZE + " stocks ");  
     }
-   
     /**
      * if possible sell all stock from the wanted stock, remove from portfolio and Rearranges the stock array
      * @param symbol is the symbol of the stock to delete
+     * @throws PortfolioException
      */
     public void removeStock(String symbol) throws PortfolioException  {
         int removeIndex = getStock(symbol);
@@ -203,14 +200,14 @@ public class Portfolio  implements PortfolioInterface {
             throw new StockNotExistException("cant remove stock becouse stock is not in portfolio");
        
     }
-   
     /**
      * sell if possible sell the wanted quantity from wanted stock
      * @param symbol is the symbol of wanted stock
      * @param quantity is the quantity of stocks to sell (-1) for sell all
      * @throws BalanceException 
+     * @throws PortfolioException 
      */
-    public void sellStock(String symbol, int quantity) throws PortfolioException {
+    public void sellStock(String symbol, int quantity) throws CouldNotSellStockException, BalanceException {
         int sellIndex = getStock(symbol);
         boolean res = false;
        
@@ -231,7 +228,7 @@ public class Portfolio  implements PortfolioInterface {
             ((Stock)stocks[sellIndex]).updateQuantity(-quantity);
         }
         else
-            throw new PortfolioException("could not sell stock");
+            throw new CouldNotSellStockException();
     }
    
     /**
@@ -240,8 +237,10 @@ public class Portfolio  implements PortfolioInterface {
      * @param stock is the stock to buy
      * @param quantity is the quantity of stocks to buy (-1 for buy all stocks you can)
      * @return true for successful buy or false if not
+     * throws PortfolioException
+     * @throws BalanceException 
      */
-    public void buyStock(Stock stock, int quantity) throws PortfolioException {
+    public void buyStock(Stock stock, int quantity) throws CouldNotBuyStockException, BalanceException {
         int quantityToBuy = 0, buyIndex;
         boolean res = false;
        
@@ -254,7 +253,7 @@ public class Portfolio  implements PortfolioInterface {
         	   buyIndex = getStock(stock.getSymbol());  
            }
            catch(PortfolioException e){
-        	   throw new PortfolioException("Couldn't buy stock because , " + e.getMessage() );
+        	   throw new CouldNotBuyStockException("Couldn't buy stock because , " + e.getMessage() );
            }
             
         }     
@@ -277,7 +276,7 @@ public class Portfolio  implements PortfolioInterface {
             ((Stock)stocks[buyIndex]).updateQuantity(quantityToBuy);
         }
         else
-            throw new PortfolioException("could not buy stock");
+            throw new CouldNotBuyStockException();
     }
     /**
      * get the information about portfolio

@@ -47,7 +47,7 @@ public class Stock implements StockInterface {
             this.setStockQuantity(stockQuantity);
             this.setRecommendation(recommendation);
         }
-       
+        
         public void setSymbol(String symbol) {
             this.symbol = symbol;
         }
